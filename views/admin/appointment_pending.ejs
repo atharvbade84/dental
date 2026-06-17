@@ -1,0 +1,60 @@
+<%- include('header.ejs')%>
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Starter</p>
+                <h1 class="h3 mb-1">Appointment Pending</h1>
+                
+              </div>
+            </div>  
+          </div>
+          <section class="panel"> 
+            <form action="appointment_search" method="get">
+              <label>From</label>
+              <input type="date" name="from_date" />
+              <label>To</label>
+              <input type="date" name="to_date" />
+              <label>Status</label>
+              <select name="status">
+                <option>Choose</option>
+                <option>Pending</option>
+                <option>Confirm</option>
+                <option>Reject</option>
+              </select>
+              <button>Search</button>
+            </form>
+        
+            <table class="table table-border mt-5">
+                <tr>
+                    <th>Sr.no</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Service_id</th>
+                    <th>Appointment_Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                <% for(var i=0;i<data.length;i++){ %>
+                    <tr>
+                    <th><%= i+1; %></th>
+                    <th><%=data[i].name; %></th>
+                    <th><%=data[i].email; %></th>
+                    <th><%=data[i].service_id; %></th>
+                    <th><%=data[i].appointment_date%></th>
+                    <th><%=data[i].status; %></th>
+                    <th>
+                        <a href="/admin/confirm/<%=data[i].aid;%>"><button class="btn ">Confirm</button></a>
+                        <a href="/admin/reject/<%=data[i].aid;%>"><button class="btn ">Reject</button></a>
+                    </th>
+                </tr>
+
+                <% } %>
+            </table>
+          </section>
+        </div>
+      </main>
+
+      <%- include('footer.ejs')%>
